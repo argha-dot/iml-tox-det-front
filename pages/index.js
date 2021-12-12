@@ -7,6 +7,7 @@ export default function Home() {
   const [comment, setComment] = useState("");
   const [isToxic, setIsToxic] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +25,12 @@ export default function Home() {
         setIsToxic(resp.data.is_toxic);
         setLoading(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        setError(true);
+        console.log(error)
+      });
   };
 
   return (
